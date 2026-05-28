@@ -24,8 +24,8 @@ assign Hsync = (H_count_val < 96) ? 1'b1:1'b0;
 assign Vsync = (V_count_val < 2) ? 1'b1:1'b0;
 
 //colours
-assign red = (H_count_val > 143 && H_count_val < 784 && H_count_val > 34 && H_count_val < 515) ? 4'hF:4'h0;
-assign green = (H_count_val > 143 && H_count_val < 784 && H_count_val > 34 && H_count_val < 515) ? 4'hF:4'h0;
-assign blue = (H_count_val > 143 && H_count_val < 784 && H_count_val > 34 && H_count_val < 515) ? 4'hF:4'h0;
+assign red = (H_count_val > 143 && H_count_val < 784 && V_count_val > 34 && V_count_val < 515) ? 4'hF:4'h0;
+assign green = (H_count_val > 143 && H_count_val < 784 && V_count_val > 34 && V_count_val < 515) ? 4'hF:4'h0;
+assign blue = (H_count_val > 143 && H_count_val < 784 && V_count_val > 34 && V_count_val < 515) ? 4'hF:4'h0;
 
 endmodule
