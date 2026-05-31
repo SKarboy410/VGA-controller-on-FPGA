@@ -2,7 +2,7 @@
 
 module clock_divider #(parameter prescaler_val = 1)(
     input wire clk, //100Mhz
-    output reg divided_clk = 0 //25Mhz
+    output reg divided_clk = 0
     );
 
 //precaler value = given_frequency/(2*desired_frequency) - 1

@@ -3,7 +3,7 @@
 module horizontal_counter(
     input clk_25Mhz,
     output reg enable_V_counter = 0,
-    output reg[15:0] H_count_val = 0
+    output reg[9:0] H_count_val = 0
     );
     
     always@(posedge clk_25Mhz) begin

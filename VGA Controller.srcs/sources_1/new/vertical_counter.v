@@ -3,11 +3,11 @@
 module vertical_counter(
        input clk_25Mhz,
        input enable_V_counter,
-       output reg[15:0] V_count_val = 0
+       output reg[9:0] V_count_val = 0
     );
     
  always@(posedge clk_25Mhz) begin
-      if(enable_V_counter == 1'b1) begin
+      if(enable_V_counter) begin
         if(V_count_val < 524)
             V_count_val <= V_count_val + 1;         
          else 
