@@ -1,56 +1,40 @@
 `timescale 1ns / 1ps
 
-module test_bench();
+module top_tb;
 
-    // Inputs
+    // 100 MHz system clock
     reg clk = 0;
 
-    // Outputs
+    // VGA outputs
     wire Hsync;
     wire Vsync;
+
     wire [3:0] red;
     wire [3:0] green;
     wire [3:0] blue;
 
-    // Instantiate Unit Under Test
-    top UUT (
+    // Instantiate DUT
+    top DUT (
         .clk(clk),
+
         .Hsync(Hsync),
         .Vsync(Vsync),
+
         .red(red),
         .green(green),
         .blue(blue)
     );
 
-    // 100 MHz clock generation
-    // Period = 10ns
+    // Generate 100 MHz clock
     always #5 clk = ~clk;
 
-    // Simulation control
+    // Simulation runtime
     initial begin
 
-        $display("Starting VGA Simulation...");
+        // Run long enough for several frames
+        #20000000;
 
-        // Run simulation
-        #2000000;
-
-        $display("Simulation Finished.");
         $finish;
-    end
-
-    // Debug monitor
-    initial begin
-        $monitor(
-            "TIME=%0t | X=%d | Y=%d | HS=%b | VS=%b | R=%b G=%b B=%b",
-            $time,
-            UUT.pixel_x,
-            UUT.pixel_y,
-            Hsync,
-            Vsync,
-            red,
-            green,
-            blue
-        );
     end
 
 endmodule

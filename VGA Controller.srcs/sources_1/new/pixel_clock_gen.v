@@ -1,13 +1,13 @@
 `timescale 1ns / 1ps
 
-module clock_divider #(parameter prescaler_val = 1)(
+module pixel_clock_gen #(parameter prescaler_val = 1)(
     input wire clk, //100Mhz
     output reg divided_clk = 0
     );
 
 //precaler value = given_frequency/(2*desired_frequency) - 1
 
-integer counter_value = 0;
+reg [31:0] counter_value = 0;
 
 always@(posedge clk)
 begin

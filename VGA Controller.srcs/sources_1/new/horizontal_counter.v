@@ -1,19 +1,26 @@
 `timescale 1ns / 1ps
 
 module horizontal_counter(
-    input clk_25Mhz,
-    output reg enable_V_counter = 0,
+    input pixel_clock,
+    output reg line_done = 0,
     output reg[9:0] H_count_val = 0
     );
+
+//constants
+localparam H_VISIBLE = 640;
+localparam  H_FRONT = 16;
+localparam H_SYNC = 96;
+localparam H_BACK = 48;
+localparam H_TOTAL = H_VISIBLE + H_FRONT + H_SYNC + H_BACK;
     
-    always@(posedge clk_25Mhz) begin
-        if(H_count_val < 799) begin
+    always@(posedge pixel_clock) begin
+        if(H_count_val < H_TOTAL-1) begin
             H_count_val <= H_count_val + 1;
-            enable_V_counter <= 0;
+            line_done <= 0;
          end
          else begin
             H_count_val <= 0;
-            enable_V_counter <= 1;
+            line_done <= 1;
          end
     end
 endmodule
