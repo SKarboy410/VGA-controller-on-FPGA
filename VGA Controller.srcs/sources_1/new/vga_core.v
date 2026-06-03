@@ -33,7 +33,6 @@ localparam V_BACK = 33;
 localparam V_TOTAL = V_VISIBLE + V_FRONT + V_SYNC + V_BACK;
 
 
-wire pixel_clock;
 wire line_done;
 wire [9:0] H_count_val;
 wire [9:0] V_count_val;
@@ -55,9 +54,9 @@ assign pixel_y = V_count_val;
 assign video_active = (pixel_x < H_VISIBLE && pixel_y < V_VISIBLE);
 
 // address and pixel clocks will be synced by introducing a delay in the vga core
-reg [9:0] pixel_x_d;
-reg [9:0] pixel_y_d;
-reg video_active_d;
+reg [9:0] pixel_x_d = 0;
+reg [9:0] pixel_y_d = 0;
+reg video_active_d = 0;
 
 always @(posedge pixel_clock) begin
     pixel_x_d <= pixel_x;

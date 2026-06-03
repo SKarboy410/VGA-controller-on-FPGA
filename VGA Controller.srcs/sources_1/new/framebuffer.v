@@ -14,8 +14,8 @@ localparam FB_W = 160;
 localparam FB_H = 120;
 localparam BUFFER_SIZE = FB_W * FB_H;
 
-wire [7:0] fb_x;
-wire [6:0] fb_y;
+wire [9:0] fb_x;
+wire [9:0] fb_y;
 wire [15:0] address;
 
 //since 640*480 is too large for the BRAM, we scale it down to 160*120
@@ -36,7 +36,7 @@ initial begin
 end
 
 wire valid_pixel;
-assign valid_pixel = (fb_x < FB_W && fb_y < FB_H);
+assign valid_pixel = (fb_x < FB_W) && (fb_y < FB_H);
 
 always@(posedge pixel_clock) begin
     if(video_active && valid_pixel)
