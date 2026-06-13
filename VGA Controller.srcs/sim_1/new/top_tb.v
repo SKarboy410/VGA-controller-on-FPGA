@@ -3,9 +3,9 @@
 module top_tb;
 
     //====================================================
-    // DUT signals
+    // DUT Signals
     //====================================================
-    reg clk;
+    reg sys_clk;
 
     wire Hsync;
     wire Vsync;
@@ -15,10 +15,10 @@ module top_tb;
     wire [3:0] blue;
 
     //====================================================
-    // Instantiate DUT
+    // DUT
     //====================================================
     top DUT (
-        .clk(clk),
+        .sys_clk(sys_clk),
 
         .Hsync(Hsync),
         .Vsync(Vsync),
@@ -29,12 +29,33 @@ module top_tb;
     );
 
     //====================================================
-    // Clock generation
-    // 100 MHz clock -> 10ns period
+    // 100 MHz System Clock
     //====================================================
     initial begin
-        clk = 0;
-        forever #5 clk = ~clk;
+        sys_clk = 0;
+        forever #5 sys_clk = ~sys_clk;
+    end
+
+    //====================================================
+    // Simulation Control
+    //====================================================
+    initial begin
+
+        $display("Starting simulation...");
+
+        // Run for a while
+        #5_000_000;
+
+        $display("Finished simulation.");
+        $finish;
+    end
+
+    //====================================================
+    // Waveform Dump
+    //====================================================
+    initial begin
+        $dumpfile("top_tb.vcd");
+        $dumpvars(0, top_tb);
     end
 
 endmodule

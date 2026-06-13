@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
 module vga_core(
-    input clk,
+    input sys_clk,
 
     input [11:0] pixel_colour,
 
     output Hsync,
     output Vsync,
 
-    output pixel_clock,
+    output pixel_clk,
 
     output [9:0] pixel_x,
     output [9:0] pixel_y,
@@ -37,9 +37,10 @@ wire [9:0] H_count_val;
 wire [9:0] V_count_val;
 
 
-pixel_clock_gen VGA_clk(.clk(clk),.divided_clk(pixel_clock));
-horizontal_counter VGA_horizontal(.pixel_clock(pixel_clock), .line_done(line_done), .H_count_val(H_count_val));
-vertical_counter VGA_vertical(.pixel_clock(pixel_clock), .line_done(line_done), .V_count_val(V_count_val));
+pixel_clock_gen pixel_clk_gen(.sys_clk(sys_clk),.pixel_clk(pixel_clk));
+horizontal_counter h_counter(.pixel_clk(pixel_clk),.line_done(line_done),.H_count_val(H_count_val));
+vertical_counter v_counter(.pixel_clk(pixel_clk),.line_done(line_done),.V_count_val(V_count_val));
+
 
 //====================================================
 // Sync Signal Generation
@@ -74,8 +75,7 @@ reg [9:0] pixel_y_d = 0;
 reg video_active_d = 0;
 
 
-
-always @(posedge pixel_clock) begin
+always @(posedge pixel_clk) begin
     pixel_x_d <= pixel_x;
     pixel_y_d <= pixel_y;
     video_active_d <= video_active;

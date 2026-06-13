@@ -1,10 +1,16 @@
 `timescale 1ns / 1ps
 
 module framebuffer(
-    input pixel_clock,
+    input pixel_clk,
+
     input [9:0] pixel_x,
     input [9:0] pixel_y,
     input video_active,
+
+    // Write Port
+    input we,
+    input [15:0] write_address,
+    input [11:0] write_data,
 
     output [11:0] pixel_colour
 );
@@ -20,7 +26,7 @@ localparam BUFFER_SIZE = FB_W * FB_H;
 
 //====================================================
 // Internal Signals
-//====================================================
+//==========================    ==========================
 wire [9:0]  fb_x;
 wire [9:0]  fb_y;
 wire [15:0] fb_address;
@@ -87,7 +93,11 @@ end
 //
 // Matches BRAM behaviour
 //====================================================
-always @(posedge pixel_clock) begin
+always @(posedge pixel_clk) begin
+    // write
+    if(we)
+        framebuffer[write_address] <= write_data;
+    //read
     if(fb_read_enable)
         pixel_data <= framebuffer[fb_address];
     else

@@ -3,12 +3,12 @@
 module vga_core_tb;
 
 //inputs
-reg clk;
+reg sys_clk;
 
 //outputs
 wire Hsync;
 wire Vsync;
-wire pixel_clock;
+wire pixel_clk;
 
 wire [9:0] pixel_x;
 wire [9:0] pixel_y;
@@ -23,14 +23,14 @@ reg [11:0] pixel_colour;
 
 //instantiate DUT
 vga_core DUT(
-    .clk(clk),
+    .sys_clk(sys_clk),
 
     .pixel_colour(pixel_colour),
 
     .Hsync(Hsync),
     .Vsync(Vsync),
 
-    .pixel_clock(pixel_clock),
+    .pixel_clk(pixel_clk),
 
     .pixel_x(pixel_x),
     .pixel_y(pixel_y),
@@ -43,8 +43,8 @@ vga_core DUT(
 
 //100 MHz clock
 initial begin
-    clk = 0;
-    forever #5 clk = ~clk;
+    sys_clk = 0;
+    forever #5 sys_clk = ~sys_clk;
 end
 
 initial begin
