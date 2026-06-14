@@ -59,7 +59,7 @@ integer i;
 initial begin
 
     for(i = 0; i < 30; i = i + 1) begin
-        #768000;
+        #2000000;
         dump_fb(i);
     end
 
