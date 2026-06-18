@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module top(
-    input clk,
+    input sys_clk,
 
     output Hsync,
     output Vsync,
@@ -13,6 +13,14 @@ module top(
 
 wire [9:0] pixel_x;
 wire [9:0] pixel_y;
+
+// wire [9:0] sprite_x;
+// wire [9:0] sprite_y;
+// wire sprite_enable;
+
+wire [9:0] cpu_sprite_x;
+wire [9:0] cpu_sprite_y;
+wire cpu_sprite_enable;
 
 wire video_active;
 
@@ -54,8 +62,31 @@ framebuffer FB(
     .pixel_colour(pixel_colour)
 );
 
+// sprite_reg REG(
+//     .clk(pixel_clk),
+
+//     .sprite_x(sprite_x),
+//     .sprite_y(sprite_y)
+// );
+
+design_1_sv soc(
+    .clk_in1_0(sys_clk),
+
+    .reset_0(1'b0),
+    .ext_reset_in_0(1'b0),
+
+    .sprite_x_0(cpu_sprite_x),
+    .sprite_y_0(cpu_sprite_y),
+    .sprite_enable_0(cpu_sprite_enable)
+
+);
+
 video_engine VE(
     .pixel_clk(pixel_clk),
+
+    .sprite_x(cpu_sprite_x),
+    .sprite_y(cpu_sprite_y),
+    .sprite_enable(cpu_sprite_enable),
 
     .we(fb_we),
     .write_address(fb_write_address),

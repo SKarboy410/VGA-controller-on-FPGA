@@ -1,32 +1,46 @@
-# Vivado generated folders
+# -----------------------------
+# Vivado generated directories
+# -----------------------------
 VGA Controller.cache/
+VGA Controller.gen/
 VGA Controller.hw/
 VGA Controller.ip_user_files/
-VGA Controller.sim/
 VGA Controller.runs/
-VGA Controller.gen/
+VGA Controller.sim/
+VGA Controller.tmp/
 
-# Xilinx temp folder
+# Xilinx temporary directories
 .Xil/
+**/.Xil/
 
-# Vivado logs
+# -----------------------------
+# Vivado log files
+# -----------------------------
 *.jou
 *.log
 *.str
 
-# User-specific files
+# -----------------------------
+# User-specific project files
+# -----------------------------
 *.xpr.user
 
+# -----------------------------
 # Simulation outputs
+# -----------------------------
 *.wdb
 *.wcfg
 *.vcd
 
-# Temp/editor files
+# -----------------------------
+# Temporary/editor files
+# -----------------------------
 *~
 *.swp
 *.tmp
 
-# OS junk
+# -----------------------------
+# Operating system files
+# -----------------------------
 .DS_Store
 Thumbs.db
