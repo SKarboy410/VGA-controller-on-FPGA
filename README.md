@@ -3,9 +3,6 @@
 
 This is the project I made for my internship. This is a graphics system paired with a processor for displaying on a VGA display. This project is capable of driving a 640x480 display at 60Hz.
 
-![[Pasted image 20260621214420.png|284]]
-
-
 #### Features:
 ## Features
 
@@ -17,6 +14,9 @@ This is the project I made for my internship. This is a graphics system paired w
 - Modular graphics pipeline consisting of a VGA controller, framebuffer, video engine, sprite controller, and AXI interface.
 - Fully verified through Verilog simulation, with framebuffer dump reconstruction using Python for visual output verification.
 - Designed with future extensibility in mind, allowing features such as multiple sprites, double buffering, and hardware graphics primitives to be added.
+
+<img width="388" height="517" alt="image" src="https://github.com/user-attachments/assets/80caa610-1581-466c-a48d-445e448e28a7" />
+
 
 #### Simple descriptions of Modules:
 
@@ -33,7 +33,8 @@ Sprite Controller: A sprite is the an element on the screen which we see, it is 
 AXI4-Lite Interface: For this to be a proper SoC system, it needs a processor and AXI is used for communication between the graphics pipeline and CPU. The CPU sends commands like write_address, write_data and write_enable via the AXI slaves to the framebuffer which also has the corresponding commands and this way the CPU isn't individually drawing each pixel.
 
 CPU: A MicroBlaze CPU is used for this project.
-![[Pasted image 20260621220123.png]]
+<img width="940" height="428" alt="image" src="https://github.com/user-attachments/assets/345aac1a-7e77-4d03-bef6-9c5166eb2e1f" />
+
 
 
 #### Simulation:
@@ -41,7 +42,8 @@ CPU: A MicroBlaze CPU is used for this project.
 There are test benches for each of modules and you can just get all them by running top_tb.v. I haven't used these much in the later stages, but what I have used a lot is the framebuffer dumping, where I write some data and dump the framebuffer and a  use python utility(Check imageViewer) to reconstruct the image and display it. It has worked well.
 
 Example of framebuffer dump:
-![[Pasted image 20260621220321.png|364]]
+
+<img width="552" height="414" alt="image" src="https://github.com/user-attachments/assets/09b09af7-1db8-4772-9eaa-128fb982c931" />
 
 
 In conclusion, this was a fun project to work on and there were more things I'd liked to include such as support for multiple sprites, double buffering to eliminate screen tearing, higher display resolutions, and hardware-accelerated graphics operations such as line and shape drawing. But oh well that's for a later day, and I have learned plenty with this project including the power of verilog which I can use in the future to design some cool stuff.
@@ -49,4 +51,4 @@ In conclusion, this was a fun project to work on and there were more things I'd 
 The only part missing with this project is that I wasn't able to verify this with actual hardware, but I don't really mind that. But one thing I will do is export this project's bitstream by by-passing some parameters and use vitis to write some C programs for this, which I will also document on GitHub.
 
 For those who want it a bit more detailed:
-https://docs.google.com/document/d/1K7FmxZs1SK4d6Mg_av8xxSFclpn7vHY1/edit?usp=sharing&ouid=108525211905124825523&rtpof=true&sd=true
+ https://docs.google.com/document/d/1K7FmxZs1SK4d6Mg_av8xxSFclpn7vHY1/edit?usp=sharing&ouid=108525211905124825523&rtpof=true&sd=true
